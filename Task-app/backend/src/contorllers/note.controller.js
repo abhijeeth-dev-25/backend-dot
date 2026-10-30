@@ -70,13 +70,8 @@ const updateNoteController = async(req,res) => {
         const id = req.params.id;
         const data = req.body;
 
-        const updatenote = await noteModel.findByIdAndUpdate(id, data, { returnDocument: 'after' });
+        const updatenote = await noteModel.findByIdAndUpdate(id, data, { new: true });
 
-        if(!updatenote){
-            return res.status(404).json({
-                message: "note not found",
-            })
-        }
 
         return res.status(200).json({
             message: "note updated successfully",
@@ -89,6 +84,26 @@ const updateNoteController = async(req,res) => {
             message: "note updated Unsuccessfully",
         })
     }
+}
+
+const resetNoteController = async(req,res) => {
+  try{
+
+    const id = req.params.id;
+    const data = req.body;
+
+    const resetnote = await noteModel.findOneAndReplace(id, data, {new: true, runValidators: true})
+
+    return res.status(200).json({
+      message: "note reseted successfully",
+      data: resetnote,
+    })
+
+  }catch(err){
+    return res.status(500).json({
+      message: "note reset Unsuccessfully"
+    })
+  }
 }
 
 const deleteNoteController = async (req, res)=>{
@@ -111,4 +126,4 @@ const deleteNoteController = async (req, res)=>{
     }
 }
 
-module.exports = {createNotesController, getAllNotesController, getNoteByIdController, updateNoteController, deleteNoteController};
+module.exports = {createNotesController, getAllNotesController, getNoteByIdController, updateNoteController, deleteNoteController, resetNoteController};

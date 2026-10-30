@@ -3,7 +3,8 @@ const {createNotesController,
        getAllNotesController, 
        getNoteByIdController, 
        updateNoteController,
-       deleteNoteController} = require("../contorllers/note.controller");
+       deleteNoteController,
+       resetNoteController} = require("../contorllers/note.controller");
 
 
 const router = express.Router();
@@ -14,7 +15,9 @@ router.get("/getAllNotes", getAllNotesController)
 
 router.get("/:id", getNoteByIdController)
 
-router.put("/:id", updateNoteController)
+router.put("/:id", resetNoteController)
+
+router.patch("/:id", updateNoteController)
 
 router.delete("/:id", deleteNoteController)
 
