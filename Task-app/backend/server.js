@@ -11,6 +11,6 @@ connectDB();
 
 
 
-app.listen(3232, ()=>{
-    console.log("server running on port 3232");
+app.listen(process.env.port, ()=>{
+    console.log(`server running on port ${process.env.port}`);
 })

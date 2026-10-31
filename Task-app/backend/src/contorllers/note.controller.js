@@ -2,8 +2,6 @@ const noteModel = require("../models/note.model");
 
 
 const createNotesController = async (req, res) => {
-  console.log(req.body);
-
   try {
     const { title, subject } = req.body;
 
@@ -29,8 +27,6 @@ const getAllNotesController = async (req,res)=>{
       try{
          
         const getAllNotes = await noteModel.find();
-
-        console.log("allNotes : ",getAllNotes);
 
         res.status(200).json({
             message: "notes fetched successfully",
