@@ -1,8 +1,13 @@
 import { useState } from 'react'
-import api from '../../../shared/useApi';
+import api from '../../shared/useApi'
+import { useAuthContext } from '../context/authProvider';
+import { useNavigate } from 'react-router';
 
 const RegisterPage = () => {
 
+  const { setUser, setAccessToken } = useAuthContext();
+
+  const navigate = useNavigate();
 
   const [fullname, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,9 +20,10 @@ const RegisterPage = () => {
 
     console.log(req.data)
 
-   
+    setUser(req.data.user);
+    setAccessToken(req.data.accessToken);
 
-
+    navigate('/profile');
   }
 
 
