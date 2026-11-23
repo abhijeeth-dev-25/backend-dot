@@ -55,9 +55,10 @@ export const userGetDataContoller = async (req, res) => {
 
     try {
 
-        const accessToken = req.headers.token.split(' ')[1];
+        const accessToken = req.headers.authorization.split(' ')[1];
 
          console.log(accessToken)
+         console.log(req.headers.authorization)
 
          if(!accessToken){
             return res.status(401).json({
